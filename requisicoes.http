@@ -1,0 +1,14 @@
+POST http://localhost:3333/courses
+Content-Type: application/json
+
+{
+    "title":"Curso de fatfy"
+}
+
+
+###
+
+GET http://localhost:3333/courses
+###
+
+GET http://localhost:3333/courses/296b22ed-6110-42ae-bcea-c1296618b2d9
