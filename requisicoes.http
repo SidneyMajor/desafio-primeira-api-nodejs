@@ -2,7 +2,7 @@ POST http://localhost:3333/courses
 Content-Type: application/json
 
 {
-    "title":"Curso de fatfy"
+    "title":"Curso Node.js com Docker"
 }
 
 
@@ -11,4 +11,4 @@ Content-Type: application/json
 GET http://localhost:3333/courses
 ###
 
-GET http://localhost:3333/courses/296b22ed-6110-42ae-bcea-c1296618b2d9
+GET http://localhost:3333/courses/b6f0731a-8ab1-40da-a7c9-bfbb35cc4b0f

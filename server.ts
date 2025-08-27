@@ -1,5 +1,11 @@
 import fastify from 'fastify'
-import crypto from 'node:crypto'
+import { fastifySwagger } from '@fastify/swagger'
+import { validatorCompiler, serializerCompiler, type ZodTypeProvider, jsonSchemaTransform } from 'fastify-type-provider-zod'
+import fastifySwaggerUi from '@fastify/swagger-ui'
+import { createCoursesRoute } from './src/routes/create-course.ts'
+import { getCoursesRoute } from './src/routes/get-courses.ts'
+import { getCourseByIdRoute } from './src/routes/get.course.by-id.ts'
+import scalerAPIReference from '@scalar/fastify-api-reference'
 
 const server = fastify({
     logger: {
@@ -11,52 +17,33 @@ const server = fastify({
             },
         },
     },
-})
+}).withTypeProvider<ZodTypeProvider>()
 
-const courses = [
-    { id: '1', title: 'Curso de Node.js' },
-    { id: '2', title: 'Curso d React' },
-    { id: '3', title: 'Curso de React Native' },
-]
+if (process.env.NODE_ENV === 'development') {
+    server.register(fastifySwagger, {
+        openapi: {
+            info: {
+                title: 'Courses API',
+                version: '1.0.0'
+            }
+        },
+        transform: jsonSchemaTransform
+    })
 
-server.get('/courses', () => {
-    return { courses }
-})
+    server.register(scalerAPIReference, {
+        routePrefix: '/docs',
+    })
+}
 
-server.post('/courses', (request, reply) => {
+server.setValidatorCompiler(validatorCompiler)
+server.setSerializerCompiler(serializerCompiler)
 
-    type Body = {
-        title: string
-    }
-    const courseId = crypto.randomUUID()
-
-    const body = request.body as Body
-    const courseTitle = body.title
-    if (!courseTitle) {
-        return reply.code(400).send("Titulo não encontrado")
-    }
-
-    courses.push({ id: courseId, title: courseTitle })
-
-    return reply.code(201).send({ courseId })
-})
-
-server.get('/courses/:id', (request, reply) => {
-    type Params = {
-        id: string
-    }
-
-    const params = request.params as Params
-    const courseId = params.id
-    const course = courses.find(course => course.id === courseId)
-    if (course) {
-        return { course }
-    }
-    return reply.code(404).send()
-})
-
-
+server.register(createCoursesRoute)
+server.register(getCoursesRoute)
+server.register(getCourseByIdRoute)
 
 server.listen({ port: 3333 }).then(() => {
     console.log('HTTP server runnig!')
 })
+
+
