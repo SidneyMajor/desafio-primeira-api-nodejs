@@ -1,15 +1,66 @@
+import { hash } from "argon2";
 import { db } from "./client.ts"
 import { users, courses, enrollments } from "./schema.ts"
 import { faker } from '@faker-js/faker'
 
 async function seedDatabase() {
+    const passwordHash = await hash('123456');
+
     const userInsert = await db.insert(users).values([
-        { name: faker.person.fullName(), email: faker.internet.email() },
-        { name: faker.person.fullName(), email: faker.internet.email() },
-        { name: faker.person.fullName(), email: faker.internet.email() },
-        { name: faker.person.fullName(), email: faker.internet.email() },
-        { name: faker.person.fullName(), email: faker.internet.email() },
-        { name: faker.person.fullName(), email: faker.internet.email() },
+        {
+            name: faker.person.fullName(),
+            email: faker.internet.email(),
+            password: passwordHash,
+            role: 'Student'
+        },
+        {
+            name: faker.person.fullName(),
+            email: faker.internet.email(),
+            password: passwordHash,
+            role: 'Student'
+        },
+        {
+            name: faker.person.fullName(),
+            email: faker.internet.email(),
+            password: passwordHash,
+            role: 'Student'
+        },
+        {
+            name: faker.person.fullName(),
+            email: faker.internet.email(),
+            password: passwordHash,
+            role: 'Student'
+        },
+        {
+            name: faker.person.fullName(),
+            email: faker.internet.email(),
+            password: passwordHash,
+            role: 'Student'
+        },
+        {
+            name: faker.person.fullName(),
+            email: faker.internet.email(),
+            password: passwordHash,
+            role: 'Student'
+        },
+        {
+            name: faker.person.fullName(),
+            email: faker.internet.email(),
+            password: passwordHash,
+            role: 'Student'
+        },
+        {
+            name: faker.person.fullName(),
+            email: faker.internet.email(),
+            password: passwordHash,
+            role: 'Student'
+        },
+        {
+            name: faker.person.fullName(),
+            email: faker.internet.email(),
+            password: passwordHash,
+            role: 'Student'
+        },
     ]).returning()
 
     const courseInsert = await db.insert(courses).values([

@@ -43,6 +43,20 @@
       "when": 1756489455348,
       "tag": "0005_thick_ultimo",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1756551142369,
+      "tag": "0006_conscious_imperial_guard",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1756567543174,
+      "tag": "0007_typical_wallow",
+      "breakpoints": true
     }
   ]
 }

@@ -9,6 +9,19 @@ Content-Type: application/json
 ###
 
 GET http://localhost:3333/courses?orderBy=title
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyNTBkM2RlMS1hNjgyLTRkYTQtYTM4YS04NTNlZWJhNWFjYTMiLCJyb2xlIjoiTWFuYWdlciIsImlhdCI6MTc1NjU3MTczOCwiZXhwIjoxNzU2NTc1MzM4fQ.VXQuBGlBDX7Y5E4L6UmO7QUpQkVAfFsKclLBdpSW0fU
 ###
 
 GET http://localhost:3333/courses/b6f0731a-8ab1-40da-a7c9-bfbb35cc4b0f
+
+###
+
+POST http://localhost:3333/sessions
+Content-Type: application/json
+
+{
+    "email": "Eve49@yahoo.com",
+    "password": "123456"
+}
+
+###
